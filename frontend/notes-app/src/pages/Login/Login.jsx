@@ -24,7 +24,8 @@ const Login = () => {
 
     setError("");
 
-    console.log("Validation passed. Ready for API call.");
+    //Login API call
+    
   };
 
   return (
