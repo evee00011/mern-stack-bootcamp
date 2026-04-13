@@ -37,3 +37,8 @@ out/
 npm-debug.log*
 
 config.json
+
+# Postman
+.postman_globals.json
+.postman_environment.json
+postman_collection.json
