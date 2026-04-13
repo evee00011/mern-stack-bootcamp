@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md"; 
+import AddEditNotes from '../../pages/Home/AddEditNotes';
 
 const NoteCard = ({
     title, date, content, tags, isPinned, onEdit, onDelete, onPinNote
