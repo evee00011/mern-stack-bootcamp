@@ -60,16 +60,18 @@ const Home = () => {
       
       <div className="container mx-auto">
         <div className="grid grid-cols-3 gap-4 mt-8">
+        {allNotes.map((item, index) => (
           <NoteCard 
-            title="Meeting on 7th April" 
-            date="3rd Apr 2024" 
-            content="Meeting on 7th April Meeting on 7th April" 
-            tags="#Meeting"
-            isPinned={true}
-            onEdit={() => {}}
-            onDelete={() => {}}
-            onPinNote={() => {}}
-          />
+            key={item._id}
+            title={item.title}
+            date={item.createdOn}
+            content={item.content}
+            tags={item.tags}
+            isPinned={item.isPinned} 
+            onEdit={() => handleEdit(item)}
+            onDelete={() => deleteNote(item)}
+            onPinNote={() => updateIsPinned(item)}
+          />))}
         </div>
       </div>
 
