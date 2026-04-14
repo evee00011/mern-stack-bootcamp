@@ -18,6 +18,14 @@ const Home = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
 
+  const handleEdit = (noteDetails) => {
+    setOpenAddEditModal({
+      isShown: true,
+      data: noteDetails,
+      type: 'edit',
+    });
+  }
+
   //get user ingo
   const getUserInfo = async () => {
     try {

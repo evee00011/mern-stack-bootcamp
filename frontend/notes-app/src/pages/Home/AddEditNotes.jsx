@@ -4,28 +4,49 @@ import TagInput from '../../components/Input/TagInput';
 import axiosInstance from '../../utils/axiosInstance';
 
 const AddEditNotes = ({ noteData, type,getAllNotes, onClose }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
+  const [title, setTitle] = useState(noteData?.title ||"");
+  const [content, setContent] = useState(noteData?.content ||"");
+  const [tags, setTags] = useState(noteData?.tags ||[]);
   const [error, setError] = useState(null);
 
   //Add note
   const addNewNote = async () => {
         try {
-            const reponse = await axiosInstance.post('/add-note',  {
+            const response = await axiosInstance.post('/add-note',  {
                 title,
                 content,
                 tags,
             });
 
-            if (reponse.data && reponse.data.note) {
-                showToastMessage('Note Added Succesfully')
+            if (response.data && response.data.note) {
                 getAllNotes()
                 onClose()
             }
         } catch (error) {
-            if (error.reponse && error.reponse.data && error.response.data.message) {
-                setError(error.reponse.data.message);
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            }
+        }
+    }
+
+    // edit note
+    const editNote = async () => {
+        const noteId = noteData._id; 
+
+        try {
+            const response = await axiosInstance.put('/edit-note/' + noteId,  {
+                title,
+                content,
+                tags,
+            });
+
+            if (response.data && response.data.note) {
+                getAllNotes()
+                onClose()
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
             }
         }
     }
@@ -48,8 +69,7 @@ const AddEditNotes = ({ noteData, type,getAllNotes, onClose }) => {
     }
   };
 
-  const editNote = async () => {
-  };
+  
 
   return (
     <div className="relative">
